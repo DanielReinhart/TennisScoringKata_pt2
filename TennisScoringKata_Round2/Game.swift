@@ -16,8 +16,43 @@ import Foundation
 
 class Game {
 
+    var servingPlayerTotalPoints: Int = 0
+    var receivingPlayerTotalPoints: Int = 0
+    var gameState: GameState = .preDeuce
+
+    let pointsToStringDictionary = [0 : "0", 1: "15", 2: "30", 3: "40"]
+
     func score() -> String {
-        return "0 - 0"
+        if let gameState =  GameState.evaluateGameState(servingPlayerPoints: servingPlayerTotalPoints, receivingPlayerPoints: receivingPlayerTotalPoints) {
+
+            switch gameState {
+            case .preDeuce:
+                return "\(pointsToStringDictionary[servingPlayerTotalPoints]!) - \(pointsToStringDictionary[receivingPlayerTotalPoints]!)"
+            default:
+                return "0 - 0"
+            }
+        } else {
+            return "Error Computing Score"
+        }
     }
 
+    func servingPlayerWonPoint() {
+        servingPlayerTotalPoints += 1
+    }
+
+}
+
+enum GameState {
+    case preDeuce
+    case deuce
+    case advServer
+    case advReceiver
+    case game
+
+    static func evaluateGameState(servingPlayerPoints score1: Int, receivingPlayerPoints score2: Int) -> GameState? {
+        if (score1 <= 3 || score2 <= 3) && (score1 != 3 && score2 != 3) {
+            return .preDeuce
+        }
+        return nil
+    }
 }
