@@ -24,4 +24,24 @@ class TennisScoringKata_Round2Tests: XCTestCase {
 
         XCTAssertEqual(game.score(), "15 - 0")
     }
+
+    func testThatReceivingPlayerWonOnePoint() {
+        let game = Game()
+
+        game.receivingPlayerWonPoint()
+
+        XCTAssertEqual(game.score(), "0 - 15")
+    }
+
+    func testThatScoreIs30All() {
+        let game = Game()
+
+        game.servingPlayerWonPoint()
+        game.servingPlayerWonPoint()
+
+        game.receivingPlayerWonPoint()
+        game.receivingPlayerWonPoint()
+
+        XCTAssertEqual(game.score(), "30 - 30")
+    }
 }

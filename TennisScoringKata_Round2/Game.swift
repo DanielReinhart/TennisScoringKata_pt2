@@ -16,8 +16,8 @@ import Foundation
 
 class Game {
 
-    var servingPlayerTotalPoints: Int = 0
-    var receivingPlayerTotalPoints: Int = 0
+    private(set) var servingPlayerTotalPoints: Int = 0
+    private(set) var receivingPlayerTotalPoints: Int = 0
     var gameState: GameState = .preDeuce
 
     let pointsToStringDictionary = [0 : "0", 1: "15", 2: "30", 3: "40"]
@@ -38,6 +38,10 @@ class Game {
 
     func servingPlayerWonPoint() {
         servingPlayerTotalPoints += 1
+    }
+
+    func receivingPlayerWonPoint() {
+        receivingPlayerTotalPoints += 1
     }
 
 }
