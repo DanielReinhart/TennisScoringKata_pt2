@@ -44,4 +44,21 @@ class TennisScoringKata_Round2Tests: XCTestCase {
 
         XCTAssertEqual(game.score(), "30 - 30")
     }
+
+    func testThatScoreIsDeuce() {
+
+        let game = Game()
+
+        game.servingPlayerWonPoint()
+        game.servingPlayerWonPoint()
+        game.servingPlayerWonPoint()
+
+
+        game.receivingPlayerWonPoint()
+        game.receivingPlayerWonPoint()
+        game.receivingPlayerWonPoint()
+
+
+        XCTAssertEqual(game.score(), "Deuce")
+    }
 }

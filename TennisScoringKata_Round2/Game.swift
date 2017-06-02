@@ -28,6 +28,8 @@ class Game {
             switch gameState {
             case .preDeuce:
                 return "\(pointsToStringDictionary[servingPlayerTotalPoints]!) - \(pointsToStringDictionary[receivingPlayerTotalPoints]!)"
+            case .deuce:
+                return "Deuce"
             default:
                 return "0 - 0"
             }
@@ -56,6 +58,8 @@ enum GameState {
     static func evaluateGameState(servingPlayerPoints score1: Int, receivingPlayerPoints score2: Int) -> GameState? {
         if (score1 <= 3 || score2 <= 3) && (score1 != 3 && score2 != 3) {
             return .preDeuce
+        } else if (score1 == 3 && score2 == 3) {
+            return .deuce
         }
         return nil
     }
