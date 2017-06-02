@@ -192,5 +192,37 @@ class TennisScoringKata_Round2Tests: XCTestCase {
         XCTAssertEqual(game.score(), "Game - Receiver")
     }
 
+    //MARK:- Tougher Cases
+
+    func testThatDeuceLogicIsCorrect() {
+        let game = Game()
+
+        game.receivingPlayerWonPoint()
+        game.receivingPlayerWonPoint()
+        game.servingPlayerWonPoint()
+        game.servingPlayerWonPoint()
+
+        XCTAssertEqual(game.score(), "30 - 30")
+
+        game.receivingPlayerWonPoint()
+        XCTAssertEqual(game.score(), "30 - 40")
+
+        game.servingPlayerWonPoint()
+        XCTAssertEqual(game.score(), "Deuce")
+
+        game.servingPlayerWonPoint()
+        XCTAssertEqual(game.score(), "Adv. Server")
+
+        game.receivingPlayerWonPoint()
+        XCTAssertEqual(game.score(), "Deuce")
+
+        game.receivingPlayerWonPoint()
+        XCTAssertEqual(game.score(), "Adv. Receiver")
+
+        game.receivingPlayerWonPoint()
+        XCTAssertEqual(game.score(), "Game - Receiver")
+    }
+
+
 
 }

@@ -63,9 +63,9 @@ enum GameState {
     case gameReceiver
 
     static func evaluateGameState(servingPlayerPoints score1: Int, receivingPlayerPoints score2: Int) -> GameState? {
-        if (score1 <= 3 && score2 <= 3) && (score1 != 3 && score2 != 3) {
+        if (score1 <= 3 && score2 <= 3) && !(score1 == 3 && score2 == 3) {
             return .preDeuce
-        } else if (score1 == 3 && score2 == 3) {
+        } else if (score1 >= 3 && score2 >= 3) && (score1 == score2) {
             return .deuce
         } else if ((score1 >= 3 && score2 >= 3) && score1 - score2 == 1) {
             return .advServer;
