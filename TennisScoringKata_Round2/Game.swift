@@ -36,8 +36,8 @@ class Game {
                 return "Adv. Receiver"
             case .gameServer:
                 return "Game - Server"
-            default:
-                return "0 - 0"
+            case .gameReceiver:
+                return "Game - Receiver"
             }
         } else {
             return "Error Computing Score"
@@ -73,6 +73,8 @@ enum GameState {
             return .advReceiver
         } else if ((score1 == 4 && score2 < 3) || score1 - score2 >= 2) {
             return .gameServer;
+        } else if ((score2 == 4 && score1 < 3) || score2 - score1 >= 2) {
+            return .gameReceiver;
         }
         return nil
     }
