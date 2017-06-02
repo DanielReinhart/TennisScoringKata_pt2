@@ -15,19 +15,18 @@
 import Foundation
 
 class Game {
-
     private(set) var servingPlayerTotalPoints: Int = 0
     private(set) var receivingPlayerTotalPoints: Int = 0
     var gameState: GameState = .preDeuce
-
-    let pointsToStringDictionary = [0 : "0", 1: "15", 2: "30", 3: "40"]
 
     func score() -> String {
         if let gameState =  GameState.evaluateGameState(servingPlayerPoints: servingPlayerTotalPoints, receivingPlayerPoints: receivingPlayerTotalPoints) {
 
             switch gameState {
             case .preDeuce:
-                return "\(pointsToStringDictionary[servingPlayerTotalPoints]!) - \(pointsToStringDictionary[receivingPlayerTotalPoints]!)"
+                let serverScore = self.pointsToPlayerScore(points: servingPlayerTotalPoints)
+                let receiverScore = self.pointsToPlayerScore(points: receivingPlayerTotalPoints)
+                return "\(serverScore) - \(receiverScore)"
             case .deuce:
                 return "Deuce"
             case .advServer:
@@ -44,6 +43,21 @@ class Game {
         }
     }
 
+    private func pointsToPlayerScore(points: Int) -> String {
+        switch points {
+        case 0:
+            return "0"
+        case 1:
+            return "15"
+        case 2:
+            return "30"
+        case 3:
+            return "40"
+        default:
+            return "Error"
+        }
+    }
+
     func servingPlayerWonPoint() {
         servingPlayerTotalPoints += 1
     }
@@ -51,7 +65,6 @@ class Game {
     func receivingPlayerWonPoint() {
         receivingPlayerTotalPoints += 1
     }
-
 }
 
 enum GameState {
