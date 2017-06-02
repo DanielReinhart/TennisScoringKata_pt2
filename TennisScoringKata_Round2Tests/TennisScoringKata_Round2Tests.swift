@@ -20,7 +20,11 @@ class TennisScoringKata_Round2Tests: XCTestCase {
     func testThatServingPlayerWonOnePoint() {
         let game = Game()
 
-        game.servingPlayerWonPoint()
+        do {
+            try game.servingPlayerWonPoint()
+        } catch {
+            XCTFail("Error adding point to game")
+        }
 
         XCTAssertEqual(game.score(), "15 - 0")
     }
@@ -28,19 +32,26 @@ class TennisScoringKata_Round2Tests: XCTestCase {
     func testThatReceivingPlayerWonOnePoint() {
         let game = Game()
 
-        game.receivingPlayerWonPoint()
+        do {
+            try game.receivingPlayerWonPoint()
+        } catch {
+            XCTFail("Error adding point to game")
+        }
 
         XCTAssertEqual(game.score(), "0 - 15")
     }
 
     func testThatScoreIs30All() {
         let game = Game()
+        do {
+            try game.servingPlayerWonPoint()
+            try game.servingPlayerWonPoint()
 
-        game.servingPlayerWonPoint()
-        game.servingPlayerWonPoint()
-
-        game.receivingPlayerWonPoint()
-        game.receivingPlayerWonPoint()
+            try game.receivingPlayerWonPoint()
+            try game.receivingPlayerWonPoint()
+        } catch {
+            XCTFail("Error adding point to game")
+        }
 
         XCTAssertEqual(game.score(), "30 - 30")
     }
@@ -48,16 +59,18 @@ class TennisScoringKata_Round2Tests: XCTestCase {
     func testThatScoreIsDeuce() {
 
         let game = Game()
+        do {
+            try game.servingPlayerWonPoint()
+            try game.servingPlayerWonPoint()
+            try game.servingPlayerWonPoint()
 
-        game.servingPlayerWonPoint()
-        game.servingPlayerWonPoint()
-        game.servingPlayerWonPoint()
 
-
-        game.receivingPlayerWonPoint()
-        game.receivingPlayerWonPoint()
-        game.receivingPlayerWonPoint()
-
+            try game.receivingPlayerWonPoint()
+            try game.receivingPlayerWonPoint()
+            try game.receivingPlayerWonPoint()
+        } catch {
+            XCTFail("Error adding point to game")
+        }
 
         XCTAssertEqual(game.score(), "Deuce")
     }
@@ -65,16 +78,21 @@ class TennisScoringKata_Round2Tests: XCTestCase {
     func testThatScoreIsAdvServer() {
         let game = Game()
 
-        game.servingPlayerWonPoint()
-        game.servingPlayerWonPoint()
-        game.servingPlayerWonPoint()
+        do {
+            try game.servingPlayerWonPoint()
+            try game.servingPlayerWonPoint()
+            try game.servingPlayerWonPoint()
 
 
-        game.receivingPlayerWonPoint()
-        game.receivingPlayerWonPoint()
-        game.receivingPlayerWonPoint()
+            try game.receivingPlayerWonPoint()
+            try game.receivingPlayerWonPoint()
+            try game.receivingPlayerWonPoint()
 
-        game.servingPlayerWonPoint()
+            try game.servingPlayerWonPoint()
+        } catch {
+            XCTFail("Error adding point to game")
+
+        }
 
         XCTAssertEqual(game.score(), "Adv. Server")
     }
@@ -82,19 +100,24 @@ class TennisScoringKata_Round2Tests: XCTestCase {
     func testThatScoreIsAdvServerAfterBackAndForthOnePoint() {
         let game = Game()
 
-        game.servingPlayerWonPoint()
-        game.servingPlayerWonPoint()
-        game.servingPlayerWonPoint()
+        do {
+            try game.servingPlayerWonPoint()
+            try game.servingPlayerWonPoint()
+            try game.servingPlayerWonPoint()
 
 
-        game.receivingPlayerWonPoint()
-        game.receivingPlayerWonPoint()
-        game.receivingPlayerWonPoint()
+            try game.receivingPlayerWonPoint()
+            try game.receivingPlayerWonPoint()
+            try game.receivingPlayerWonPoint()
 
-        game.servingPlayerWonPoint()
+            try game.servingPlayerWonPoint()
 
-        game.receivingPlayerWonPoint()
-        game.servingPlayerWonPoint()
+            try game.receivingPlayerWonPoint()
+            try game.servingPlayerWonPoint()
+        } catch {
+            XCTFail("Error adding point to game")
+
+        }
 
         XCTAssertEqual(game.score(), "Adv. Server")
 
@@ -103,16 +126,21 @@ class TennisScoringKata_Round2Tests: XCTestCase {
     func testThatScoreisAdvReceiver() {
         let game = Game()
 
-        game.servingPlayerWonPoint()
-        game.servingPlayerWonPoint()
-        game.servingPlayerWonPoint()
+        do {
+            try game.servingPlayerWonPoint()
+            try game.servingPlayerWonPoint()
+            try game.servingPlayerWonPoint()
 
 
-        game.receivingPlayerWonPoint()
-        game.receivingPlayerWonPoint()
-        game.receivingPlayerWonPoint()
+            try game.receivingPlayerWonPoint()
+            try game.receivingPlayerWonPoint()
+            try game.receivingPlayerWonPoint()
 
-        game.receivingPlayerWonPoint()
+            try game.receivingPlayerWonPoint()
+        } catch {
+            XCTFail("Error adding point to game")
+
+        }
 
         XCTAssertEqual(game.score(), "Adv. Receiver")
     }
@@ -120,30 +148,42 @@ class TennisScoringKata_Round2Tests: XCTestCase {
     func testThatScoreisAdvReceiverAfterBackAndForthOnePoint() {
         let game = Game()
 
-        game.servingPlayerWonPoint()
-        game.servingPlayerWonPoint()
-        game.servingPlayerWonPoint()
+        do {
+            try game.servingPlayerWonPoint()
+            try game.servingPlayerWonPoint()
+            try game.servingPlayerWonPoint()
 
 
-        game.receivingPlayerWonPoint()
-        game.receivingPlayerWonPoint()
-        game.receivingPlayerWonPoint()
+            try game.receivingPlayerWonPoint()
+            try game.receivingPlayerWonPoint()
+            try game.receivingPlayerWonPoint()
 
-        game.receivingPlayerWonPoint()
+            try game.receivingPlayerWonPoint()
 
-        game.servingPlayerWonPoint()
-        game.receivingPlayerWonPoint()
-        
+            try game.servingPlayerWonPoint()
+            try game.receivingPlayerWonPoint()
+
+        } catch {
+            XCTFail("Error adding point to game")
+
+        }
+
+
         XCTAssertEqual(game.score(), "Adv. Receiver")
     }
 
     func testThatServerWonGame() {
         let game = Game()
 
-        game.servingPlayerWonPoint()
-        game.servingPlayerWonPoint()
-        game.servingPlayerWonPoint()
-        game.servingPlayerWonPoint()
+        do {
+            try game.servingPlayerWonPoint()
+            try game.servingPlayerWonPoint()
+            try game.servingPlayerWonPoint()
+            try game.servingPlayerWonPoint()
+        } catch {
+            XCTFail("Error adding point to game")
+
+        }
 
         XCTAssertEqual(game.score(), "Game - Server")
     }
@@ -151,15 +191,21 @@ class TennisScoringKata_Round2Tests: XCTestCase {
     func testThatServerWonGameAfterDeuce() {
         let game = Game()
 
-        game.servingPlayerWonPoint()
-        game.servingPlayerWonPoint()
-        game.servingPlayerWonPoint()
-        game.receivingPlayerWonPoint()
-        game.receivingPlayerWonPoint()
-        game.receivingPlayerWonPoint()
+        do {
+            try game.servingPlayerWonPoint()
+            try game.servingPlayerWonPoint()
+            try game.servingPlayerWonPoint()
+            try game.receivingPlayerWonPoint()
+            try game.receivingPlayerWonPoint()
+            try game.receivingPlayerWonPoint()
 
-        game.servingPlayerWonPoint()
-        game.servingPlayerWonPoint()
+            try game.servingPlayerWonPoint()
+            try game.servingPlayerWonPoint()
+
+        } catch {
+            XCTFail("Error adding point to game")
+
+        }
 
         XCTAssertEqual(game.score(), "Game - Server")
     }
@@ -168,10 +214,15 @@ class TennisScoringKata_Round2Tests: XCTestCase {
     func testThatReceiverWonGame() {
         let game = Game()
 
-        game.receivingPlayerWonPoint()
-        game.receivingPlayerWonPoint()
-        game.receivingPlayerWonPoint()
-        game.receivingPlayerWonPoint()
+        do {
+            try game.receivingPlayerWonPoint()
+            try game.receivingPlayerWonPoint()
+            try game.receivingPlayerWonPoint()
+            try game.receivingPlayerWonPoint()
+        } catch {
+            XCTFail("Error adding point to game")
+
+        }
 
         XCTAssertEqual(game.score(), "Game - Receiver")
     }
@@ -179,15 +230,20 @@ class TennisScoringKata_Round2Tests: XCTestCase {
     func testThatReceiverWonGameAfterDeuce() {
         let game = Game()
 
-        game.receivingPlayerWonPoint()
-        game.receivingPlayerWonPoint()
-        game.receivingPlayerWonPoint()
-        game.servingPlayerWonPoint()
-        game.servingPlayerWonPoint()
-        game.servingPlayerWonPoint()
+        do {
+            try game.receivingPlayerWonPoint()
+            try game.receivingPlayerWonPoint()
+            try game.receivingPlayerWonPoint()
+            try game.servingPlayerWonPoint()
+            try game.servingPlayerWonPoint()
+            try game.servingPlayerWonPoint()
 
-        game.receivingPlayerWonPoint()
-        game.receivingPlayerWonPoint()
+            try game.receivingPlayerWonPoint()
+            try game.receivingPlayerWonPoint()
+        } catch {
+            XCTFail("Error adding point to game")
+
+        }
 
         XCTAssertEqual(game.score(), "Game - Receiver")
     }
@@ -197,32 +253,59 @@ class TennisScoringKata_Round2Tests: XCTestCase {
     func testThatDeuceLogicIsCorrect() {
         let game = Game()
 
-        game.receivingPlayerWonPoint()
-        game.receivingPlayerWonPoint()
-        game.servingPlayerWonPoint()
-        game.servingPlayerWonPoint()
+        do {
+            try game.receivingPlayerWonPoint()
+            try game.receivingPlayerWonPoint()
+            try game.servingPlayerWonPoint()
+            try game.servingPlayerWonPoint()
 
-        XCTAssertEqual(game.score(), "30 - 30")
+            XCTAssertEqual(game.score(), "30 - 30")
 
-        game.receivingPlayerWonPoint()
-        XCTAssertEqual(game.score(), "30 - 40")
+            try game.receivingPlayerWonPoint()
+            XCTAssertEqual(game.score(), "30 - 40")
 
-        game.servingPlayerWonPoint()
-        XCTAssertEqual(game.score(), "Deuce")
+            try game.servingPlayerWonPoint()
+            XCTAssertEqual(game.score(), "Deuce")
 
-        game.servingPlayerWonPoint()
-        XCTAssertEqual(game.score(), "Adv. Server")
+            try game.servingPlayerWonPoint()
+            XCTAssertEqual(game.score(), "Adv. Server")
 
-        game.receivingPlayerWonPoint()
-        XCTAssertEqual(game.score(), "Deuce")
+            try game.receivingPlayerWonPoint()
+            XCTAssertEqual(game.score(), "Deuce")
 
-        game.receivingPlayerWonPoint()
-        XCTAssertEqual(game.score(), "Adv. Receiver")
+            try game.receivingPlayerWonPoint()
+            XCTAssertEqual(game.score(), "Adv. Receiver")
 
-        game.receivingPlayerWonPoint()
-        XCTAssertEqual(game.score(), "Game - Receiver")
+            try game.receivingPlayerWonPoint()
+            XCTAssertEqual(game.score(), "Game - Receiver")
+        } catch {
+            XCTFail("Error adding point to game")
+        }
     }
 
+    func testThatGameHasEnded() {
+        let game = Game()
 
+        let expectation = XCTestExpectation(description: "hit game error")
+        do {
+            try game.receivingPlayerWonPoint()
+            try game.receivingPlayerWonPoint()
+            try game.receivingPlayerWonPoint()
+            try game.receivingPlayerWonPoint()
 
+            try game.servingPlayerWonPoint()
+            XCTAssertEqual(game.score(), "Game - Receiver")
+            try game.servingPlayerWonPoint()
+            XCTAssertEqual(game.score(), "Game - Receiver")
+            try game.servingPlayerWonPoint()
+            XCTAssertEqual(game.score(), "Game - Receiver")
+            try game.servingPlayerWonPoint()
+            XCTAssertEqual(game.score(), "Game - Receiver")
+        } catch GameError.gameEnded {
+            expectation.fulfill()
+        } catch {
+            XCTFail("that shouldnt have happened")
+        }
+
+    }
 }

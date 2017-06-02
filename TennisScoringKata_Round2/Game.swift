@@ -14,10 +14,15 @@
 
 import Foundation
 
+enum GameError: Error {
+    case gameEnded
+}
+
 class Game {
 
     private(set) var servingPlayerTotalPoints: Int = 0
     private(set) var receivingPlayerTotalPoints: Int = 0
+    private var gameHasEnded: Bool = false
     var gameState: GameState = .preDeuce
 
     let pointsToStringDictionary = [0 : "0", 1: "15", 2: "30", 3: "40"]
@@ -35,8 +40,10 @@ class Game {
             case .advReceiver:
                 return "Adv. Receiver"
             case .gameServer:
+                gameHasEnded = true
                 return "Game - Server"
             case .gameReceiver:
+                gameHasEnded = true
                 return "Game - Receiver"
             }
         } else {
@@ -44,11 +51,17 @@ class Game {
         }
     }
 
-    func servingPlayerWonPoint() {
+    func servingPlayerWonPoint() throws -> Void {
+        if gameHasEnded {
+            throw GameError.gameEnded
+        }
         servingPlayerTotalPoints += 1
     }
 
-    func receivingPlayerWonPoint() {
+    func receivingPlayerWonPoint() throws -> Void {
+        if gameHasEnded {
+            throw GameError.gameEnded
+        }
         receivingPlayerTotalPoints += 1
     }
 
