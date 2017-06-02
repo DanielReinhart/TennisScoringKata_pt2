@@ -11,26 +11,218 @@ import XCTest
 
 class TennisScoringKata_Round2Tests: XCTestCase {
     
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    func testThatScoreIsInitialized() {
+        let game = Game()
+
+        XCTAssertEqual(game.score(), "0 - 0")
     }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
+
+    func testThatServingPlayerWonOnePoint() {
+        let game = Game()
+
+        game.servingPlayerWonPoint()
+
+        XCTAssertEqual(game.score(), "15 - 0")
     }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+
+    func testThatReceivingPlayerWonOnePoint() {
+        let game = Game()
+
+        game.receivingPlayerWonPoint()
+
+        XCTAssertEqual(game.score(), "0 - 15")
     }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+
+    func testThatScoreIs30All() {
+        let game = Game()
+
+        game.servingPlayerWonPoint()
+        game.servingPlayerWonPoint()
+
+        game.receivingPlayerWonPoint()
+        game.receivingPlayerWonPoint()
+
+        XCTAssertEqual(game.score(), "30 - 30")
     }
-    
+
+    func testThatScoreIsDeuce() {
+
+        let game = Game()
+
+        game.servingPlayerWonPoint()
+        game.servingPlayerWonPoint()
+        game.servingPlayerWonPoint()
+
+
+        game.receivingPlayerWonPoint()
+        game.receivingPlayerWonPoint()
+        game.receivingPlayerWonPoint()
+
+
+        XCTAssertEqual(game.score(), "Deuce")
+    }
+
+    func testThatScoreIsAdvServer() {
+        let game = Game()
+
+        game.servingPlayerWonPoint()
+        game.servingPlayerWonPoint()
+        game.servingPlayerWonPoint()
+
+
+        game.receivingPlayerWonPoint()
+        game.receivingPlayerWonPoint()
+        game.receivingPlayerWonPoint()
+
+        game.servingPlayerWonPoint()
+
+        XCTAssertEqual(game.score(), "Adv. Server")
+    }
+
+    func testThatScoreIsAdvServerAfterBackAndForthOnePoint() {
+        let game = Game()
+
+        game.servingPlayerWonPoint()
+        game.servingPlayerWonPoint()
+        game.servingPlayerWonPoint()
+
+
+        game.receivingPlayerWonPoint()
+        game.receivingPlayerWonPoint()
+        game.receivingPlayerWonPoint()
+
+        game.servingPlayerWonPoint()
+
+        game.receivingPlayerWonPoint()
+        game.servingPlayerWonPoint()
+
+        XCTAssertEqual(game.score(), "Adv. Server")
+
+    }
+
+    func testThatScoreisAdvReceiver() {
+        let game = Game()
+
+        game.servingPlayerWonPoint()
+        game.servingPlayerWonPoint()
+        game.servingPlayerWonPoint()
+
+
+        game.receivingPlayerWonPoint()
+        game.receivingPlayerWonPoint()
+        game.receivingPlayerWonPoint()
+
+        game.receivingPlayerWonPoint()
+
+        XCTAssertEqual(game.score(), "Adv. Receiver")
+    }
+
+    func testThatScoreisAdvReceiverAfterBackAndForthOnePoint() {
+        let game = Game()
+
+        game.servingPlayerWonPoint()
+        game.servingPlayerWonPoint()
+        game.servingPlayerWonPoint()
+
+
+        game.receivingPlayerWonPoint()
+        game.receivingPlayerWonPoint()
+        game.receivingPlayerWonPoint()
+
+        game.receivingPlayerWonPoint()
+
+        game.servingPlayerWonPoint()
+        game.receivingPlayerWonPoint()
+        
+        XCTAssertEqual(game.score(), "Adv. Receiver")
+    }
+
+    func testThatServerWonGame() {
+        let game = Game()
+
+        game.servingPlayerWonPoint()
+        game.servingPlayerWonPoint()
+        game.servingPlayerWonPoint()
+        game.servingPlayerWonPoint()
+
+        XCTAssertEqual(game.score(), "Game - Server")
+    }
+
+    func testThatServerWonGameAfterDeuce() {
+        let game = Game()
+
+        game.servingPlayerWonPoint()
+        game.servingPlayerWonPoint()
+        game.servingPlayerWonPoint()
+        game.receivingPlayerWonPoint()
+        game.receivingPlayerWonPoint()
+        game.receivingPlayerWonPoint()
+
+        game.servingPlayerWonPoint()
+        game.servingPlayerWonPoint()
+
+        XCTAssertEqual(game.score(), "Game - Server")
+    }
+
+
+    func testThatReceiverWonGame() {
+        let game = Game()
+
+        game.receivingPlayerWonPoint()
+        game.receivingPlayerWonPoint()
+        game.receivingPlayerWonPoint()
+        game.receivingPlayerWonPoint()
+
+        XCTAssertEqual(game.score(), "Game - Receiver")
+    }
+
+    func testThatReceiverWonGameAfterDeuce() {
+        let game = Game()
+
+        game.receivingPlayerWonPoint()
+        game.receivingPlayerWonPoint()
+        game.receivingPlayerWonPoint()
+        game.servingPlayerWonPoint()
+        game.servingPlayerWonPoint()
+        game.servingPlayerWonPoint()
+
+        game.receivingPlayerWonPoint()
+        game.receivingPlayerWonPoint()
+
+        XCTAssertEqual(game.score(), "Game - Receiver")
+    }
+
+    //MARK:- Tougher Cases
+
+    func testThatDeuceLogicIsCorrect() {
+        let game = Game()
+
+        game.receivingPlayerWonPoint()
+        game.receivingPlayerWonPoint()
+        game.servingPlayerWonPoint()
+        game.servingPlayerWonPoint()
+
+        XCTAssertEqual(game.score(), "30 - 30")
+
+        game.receivingPlayerWonPoint()
+        XCTAssertEqual(game.score(), "30 - 40")
+
+        game.servingPlayerWonPoint()
+        XCTAssertEqual(game.score(), "Deuce")
+
+        game.servingPlayerWonPoint()
+        XCTAssertEqual(game.score(), "Adv. Server")
+
+        game.receivingPlayerWonPoint()
+        XCTAssertEqual(game.score(), "Deuce")
+
+        game.receivingPlayerWonPoint()
+        XCTAssertEqual(game.score(), "Adv. Receiver")
+
+        game.receivingPlayerWonPoint()
+        XCTAssertEqual(game.score(), "Game - Receiver")
+    }
+
+
+
 }

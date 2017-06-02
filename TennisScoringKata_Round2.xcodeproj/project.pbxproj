@@ -14,6 +14,8 @@
 		837971E31ECF59AD00146CB9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 837971E11ECF59AD00146CB9 /* LaunchScreen.storyboard */; };
 		837971EE1ECF59AD00146CB9 /* TennisScoringKata_Round2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837971ED1ECF59AD00146CB9 /* TennisScoringKata_Round2Tests.swift */; };
 		837971F91ECF59AD00146CB9 /* TennisScoringKata_Round2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837971F81ECF59AD00146CB9 /* TennisScoringKata_Round2UITests.swift */; };
+		837972071ECF59E900146CB9 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837972061ECF59E900146CB9 /* Game.swift */; };
+		837972081ECF5A5900146CB9 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837972061ECF59E900146CB9 /* Game.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,7 @@
 		837971F41ECF59AD00146CB9 /* TennisScoringKata_Round2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TennisScoringKata_Round2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		837971F81ECF59AD00146CB9 /* TennisScoringKata_Round2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TennisScoringKata_Round2UITests.swift; sourceTree = "<group>"; };
 		837971FA1ECF59AD00146CB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		837972061ECF59E900146CB9 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +102,7 @@
 			children = (
 				837971D81ECF59AD00146CB9 /* AppDelegate.swift */,
 				837971DA1ECF59AD00146CB9 /* ViewController.swift */,
+				837972061ECF59E900146CB9 /* Game.swift */,
 				837971DC1ECF59AD00146CB9 /* Main.storyboard */,
 				837971DF1ECF59AD00146CB9 /* Assets.xcassets */,
 				837971E11ECF59AD00146CB9 /* LaunchScreen.storyboard */,
@@ -263,6 +267,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				837971DB1ECF59AD00146CB9 /* ViewController.swift in Sources */,
+				837972071ECF59E900146CB9 /* Game.swift in Sources */,
 				837971D91ECF59AD00146CB9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -272,6 +277,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				837971EE1ECF59AD00146CB9 /* TennisScoringKata_Round2Tests.swift in Sources */,
+				837972081ECF5A5900146CB9 /* Game.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
