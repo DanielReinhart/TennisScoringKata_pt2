@@ -30,6 +30,8 @@ class Game {
                 return "\(pointsToStringDictionary[servingPlayerTotalPoints]!) - \(pointsToStringDictionary[receivingPlayerTotalPoints]!)"
             case .deuce:
                 return "Deuce"
+            case .advServer:
+                return "Adv. Server"
             default:
                 return "0 - 0"
             }
@@ -60,6 +62,8 @@ enum GameState {
             return .preDeuce
         } else if (score1 == 3 && score2 == 3) {
             return .deuce
+        } else if ((score1 >= 3 && score2 >= 3) && score1 - score2 == 1) {
+            return .advServer;
         }
         return nil
     }

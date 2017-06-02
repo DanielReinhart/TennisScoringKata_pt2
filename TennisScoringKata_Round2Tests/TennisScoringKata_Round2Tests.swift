@@ -61,4 +61,43 @@ class TennisScoringKata_Round2Tests: XCTestCase {
 
         XCTAssertEqual(game.score(), "Deuce")
     }
+
+    func testThatScoreIsAdvServer() {
+        let game = Game()
+
+        game.servingPlayerWonPoint()
+        game.servingPlayerWonPoint()
+        game.servingPlayerWonPoint()
+
+
+        game.receivingPlayerWonPoint()
+        game.receivingPlayerWonPoint()
+        game.receivingPlayerWonPoint()
+
+        game.servingPlayerWonPoint()
+
+        XCTAssertEqual(game.score(), "Adv. Server")
+    }
+
+    func testThatScoreIsAdvServerAfterBackAndForthOnePoint() {
+        let game = Game()
+
+        game.servingPlayerWonPoint()
+        game.servingPlayerWonPoint()
+        game.servingPlayerWonPoint()
+
+
+        game.receivingPlayerWonPoint()
+        game.receivingPlayerWonPoint()
+        game.receivingPlayerWonPoint()
+
+        game.servingPlayerWonPoint()
+
+        game.receivingPlayerWonPoint()
+        game.servingPlayerWonPoint()
+
+        XCTAssertEqual(game.score(), "Adv. Server")
+
+    }
+
 }
